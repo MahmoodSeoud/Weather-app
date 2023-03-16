@@ -1,38 +1,49 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.web-cover {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  height: 100vh;
+  background-image: url('../images/mix.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.App-link {
-  color: #61dafb;
+.image {
+  flex: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.input {
+  flex: 0.5;
+  /* background-color: rgba(9, 9, 9, 0.5); */
+  backdrop-filter: blur(2vh) brightness(70%);
+  height: 100vh;
+  padding: 5rem;
+  font-size: 26px;
+  box-sizing: border-box;
+  margin-bottom: 0;
+}
+
+.search-input {
+  margin-top: 2vh;
+  color: white;
+  border: none;
+  background-color: transparent;
+  width: 20vh;
+  height: 2vh;
+  margin-bottom: 0;
+}
+.search-underscore{
+  margin: 0;
+}
+
+.CityCard-card-container {
+  margin-top: 10vh;
+}
+
+.CityCard-card {
+  color: gray;
+}
+
+.CityCard-card:active {
+  color: white;
 }
