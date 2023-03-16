@@ -3,6 +3,7 @@ import './App.css';
 import CityCard from './WeatherApp/CityCard';
 import CityDetails from './WeatherApp/CityDetails';
 import Search from './WeatherApp/Search';
+import {API} from './API_Key'
 
 let nextId: number = 0;
 const defaultCities: City[] = [{
@@ -17,6 +18,7 @@ export interface City {
   name: string;
 }
 
+
 function App() {
   const [name, setName] = useState('');
   const [cities, setCities] = useState<City[]>(defaultCities);
@@ -27,8 +29,13 @@ function App() {
     console.log(cities)
   }, [name]);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
+    console.log(API)
+
+    let results = await fetch(API)
+    results.json()
+    console.log(results)
     setCities([...cities, {
       key: ++nextId,
       temperature: 0,
