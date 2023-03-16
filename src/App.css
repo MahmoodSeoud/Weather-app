@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Kong script', 'SF PRO', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  src: url('../fonts/KongScript-Regular.ttf');
+}
+
 .web-cover {
   display: flex;
   color: white;
@@ -10,7 +15,30 @@
 
 .image {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
+
+.city-details-container {
+  display: flex;
+}
+
+.city-temp {
+  font-size: 50px;
+  margin-right: 1vh;
+}
+
+.city-details {
+  font-family: 'Kong script';
+  font-size: 36px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  /* add text shadow for better visibility */
+  padding: 20px;
+  /* add padding to make the element look less cramped */
+}
+
 
 .input {
   flex: 0.5;
@@ -32,7 +60,8 @@
   height: 2vh;
   margin-bottom: 0;
 }
-.search-underscore{
+
+.search-underscore {
   margin: 0;
 }
 

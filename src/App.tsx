@@ -56,11 +56,13 @@ function App() {
   return (
     <div className='web-cover'>
       <div className='image'>
+        <div className='city-details'>
         {selectedCity && (
           <CityDetails
             temperature={selectedCity.temperature}
           />
         )}
+        </div>
       </div>
       <div className='input'>
 
