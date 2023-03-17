@@ -1,8 +1,3 @@
-@font-face {
-  font-family: 'Kong script', 'SF PRO', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  src: url('../fonts/KongScript-Regular.ttf');
-}
-
 .web-cover {
   display: flex;
   color: white;
@@ -23,22 +18,47 @@
 
 .city-details-container {
   display: flex;
+  align-items: flex-end;
+  font-family: 'Jost' sans-serif;
+  margin-bottom: 10vh;
+}
+
+.temp-sup {
+  font-size: 150px;
 }
 
 .city-temp {
-  font-size: 50px;
-  margin-right: 1vh;
+  font-size: 200px;
+  margin-bottom: 0;
+  align-self: flex-end;
 }
 
-.city-details {
-  font-family: 'Kong script';
-  font-size: 36px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  /* add text shadow for better visibility */
-  padding: 20px;
-  /* add padding to make the element look less cramped */
+.city-more-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 0;
+  margin-bottom: 40px;
 }
 
+.date {
+  font-size: 25px;
+  margin-top: 0;
+  margin-bottom: 5px;
+  /* adjust margin to create spacing */
+  width: 25vh;
+  text-align: center;
+  /* center the date text */
+  color: rgb(220, 220, 220);
+}
+
+
+
+.city-location {
+  font-size: 100px;
+  margin-bottom: 0;
+}
 
 .input {
   flex: 0.5;

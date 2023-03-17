@@ -31,10 +31,10 @@ function App() {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log(API)
-
-    let results = await fetch(API)
-    results.json()
+    
+    let results = await fetch(API);
+    results.json();
+    debugger;
     console.log(results)
     setCities([...cities, {
       key: ++nextId,
