@@ -83,6 +83,7 @@ function App() {
           {selectedCity && (
             <CityDetails
               temperature={selectedCity.temperature}
+              cityName={selectedCity.name}
             />
           )}
         </div>

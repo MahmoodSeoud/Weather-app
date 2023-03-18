@@ -96,3 +96,21 @@
 .CityCard-card:active {
   color: white;
 }
+
+@media only screen and (max-width: 1300px) {
+  .temp-sup {
+    font-size: 75px;
+  }
+
+  .city-temp {
+    font-size: 100px;
+  }
+
+  .date {
+    font-size: 15px;
+  }
+
+  .city-location {
+    font-size: 50px;
+  }
+}
