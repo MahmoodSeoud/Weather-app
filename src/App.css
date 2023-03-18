@@ -39,7 +39,7 @@
   justify-content: center;
   align-items: flex-end;
   margin-top: 0;
-  margin-bottom: 40px;
+  margin-bottom: 3vh;
 }
 
 .date {
@@ -47,7 +47,7 @@
   margin-top: 0;
   margin-bottom: 5px;
   /* adjust margin to create spacing */
-  width: 25vh;
+  width: max-content;
   text-align: center;
   /* center the date text */
   color: rgb(220, 220, 220);
