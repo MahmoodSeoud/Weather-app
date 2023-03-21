@@ -33,38 +33,55 @@ function App() {
   const handleSubmit = (event: any) => {
     event.preventDefault();
 
+    let API: string = APILocation(name);
+    let [lat, lon] = getLocation(API);
+    console.log([lat, lon])
+    API = APITemp([lat, lon])
+    getTemp(API)
+    setName("");
+  }
 
-    let lat: string = "";
-    let lon: string = "";
-    let API: string = APILocation(name)
+  const getLocation = (API: any): any[] => {
 
+    let lat: number = 0;
+    let lon: number = 0;
+
+    fetch(API)
+      .then(response => response.json())
+      .then(data => {
+        debugger
+        lat = data[0].lat;
+        lon = data[0].lon;
+        return [data[0].lat, data[0].lon];
+      }).catch(e =>
+        console.log(e)
+      );
+
+    debugger
+    return [0,0]; 
+  }
+
+  const getTemp = (API: any) => {
+
+    let tempName: string = name
     // Get data
     fetch(API)
       .then(response => response.json())
       .then(data => {
-        lat = data[0].lat
-        lon = data[0].lon
-      }
-
-      ).catch(e =>
-        console.log(e)
-      );
-
-    API = APITemp(lat, lon)
-    fetch(API)
-      .then(response => response.json())
-      .then(data => {
+        debugger;
         setCities([...cities, {
-          key: ++nextId,
+          key: data.id,
           temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
-                                                            // and set the temperature to the api call
-          name: name,
+          // and set the temperature to the api call
+          name: tempName,
         }]);
       }).catch(e =>
         console.log(e)
       );
-  }
 
+    debugger;
+
+  }
 
   const handleKeyDown = (event: any) => {
     if (event.keyCode === 13) {
