@@ -20,8 +20,8 @@ export interface City {
 }
 
 
-    let lat: number = 0;
-    let lon: number = 0;
+let lat: number = 0;
+let lon: number = 0;
 function App() {
   const [name, setName] = useState('');
   const [cities, setCities] = useState<City[]>(defaultCities);
@@ -32,45 +32,49 @@ function App() {
         console.log(cities) */
   }, [name]);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     let API: string = APILocation(name);
-    [lat, lon] = getLocation(API);
-    debugger;
+    [lat, lon] = await getLocation(API);
+
     API = APITemp([lat, lon])
     getTemp(API)
+
     setName("");
   }
 
-  const getLocation = (API: any) => {
-
-     try {
-     let data: any = fetch(API).then(response => response.json())
-
-     lat = data[0].lat;
-     lon = data[0].lon;
-
-     } catch(error){
-    console.log(error)
-     }
-    return [lat, lon]; 
+  const getLocation = (API: any): Promise<number[]> => {
+    return new Promise((resolve, reject) => {
+      fetch(API)
+        .then(response => response.json())
+        .then(data => {
+          lat = data[0].lat;
+          lon = data[0].lon;
+          resolve([lat, lon]);
+        }).catch(e =>
+          reject(e)
+        );
+    })
   }
 
   const getTemp = (API: any) => {
-    let objTemp: any = null
+
     let tempName: string = name
     // Get data
-     let data: any = fetch(API)
-     .then(response => response.json())
-     .then(data => objTemp = data)
-        debugger;
+    fetch(API)
+      .then(response => response.json())
+      .then(data => {
         setCities([...cities, {
           key: data.id,
           temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
           // and set the temperature to the api call
           name: tempName,
         }]);
+        debugger;
+      }).catch(e =>
+        console.log(e)
+      );
 
     debugger;
 
