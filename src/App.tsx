@@ -19,9 +19,10 @@ export interface City {
   name: string;
 }
 
-
+// Global lattiude and longitude for the web API
 let lat: number = 0;
 let lon: number = 0;
+
 function App() {
   const [name, setName] = useState('');
   const [cities, setCities] = useState<City[]>(defaultCities);
@@ -61,23 +62,21 @@ function App() {
   const getTemp = (API: any) => {
 
     let tempName: string = name
-    // Get data
-    fetch(API)
-      .then(response => response.json())
-      .then(data => {
-        setCities([...cities, {
-          key: data.id,
-          temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
-          // and set the temperature to the api call
-          name: tempName,
-        }]);
-        debugger;
-      }).catch(e =>
-        console.log(e)
-      );
-
-    debugger;
-
+    try {
+      // Get data
+      fetch(API)
+        .then(response => response.json())
+        .then(data => {
+          setCities([...cities, {
+            key: data.id,
+            temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
+            // and set the temperature to the api call
+            name: tempName,
+          }]);
+        })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleKeyDown = (event: any) => {
