@@ -20,6 +20,8 @@ export interface City {
 }
 
 
+    let lat: number = 0;
+    let lon: number = 0;
 function App() {
   const [name, setName] = useState('');
   const [cities, setCities] = useState<City[]>(defaultCities);
@@ -34,40 +36,34 @@ function App() {
     event.preventDefault();
 
     let API: string = APILocation(name);
-    let [lat, lon] = getLocation(API);
-    console.log([lat, lon])
+    [lat, lon] = getLocation(API);
+    debugger;
     API = APITemp([lat, lon])
     getTemp(API)
     setName("");
   }
 
-  const getLocation = (API: any): any[] => {
+  const getLocation = (API: any) => {
 
-    let lat: number = 0;
-    let lon: number = 0;
+     try {
+     let data: any = fetch(API).then(response => response.json())
 
-    fetch(API)
-      .then(response => response.json())
-      .then(data => {
-        debugger
-        lat = data[0].lat;
-        lon = data[0].lon;
-        return [data[0].lat, data[0].lon];
-      }).catch(e =>
-        console.log(e)
-      );
+     lat = data[0].lat;
+     lon = data[0].lon;
 
-    debugger
-    return [0,0]; 
+     } catch(error){
+    console.log(error)
+     }
+    return [lat, lon]; 
   }
 
   const getTemp = (API: any) => {
-
+    let objTemp: any = null
     let tempName: string = name
     // Get data
-    fetch(API)
-      .then(response => response.json())
-      .then(data => {
+     let data: any = fetch(API)
+     .then(response => response.json())
+     .then(data => objTemp = data)
         debugger;
         setCities([...cities, {
           key: data.id,
@@ -75,9 +71,6 @@ function App() {
           // and set the temperature to the api call
           name: tempName,
         }]);
-      }).catch(e =>
-        console.log(e)
-      );
 
     debugger;
 
