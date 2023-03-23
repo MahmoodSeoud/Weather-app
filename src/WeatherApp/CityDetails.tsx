@@ -1,6 +1,6 @@
 import React from "react";
 import moment from 'moment';
-function CityDetails({ temperature, cityName}: { temperature: number, cityName:string }) {
+function CityDetails({ temperature, cityName}: { temperature: number | null, cityName:string }) {
     let today = ""
     today = moment(new Date()).format("HH:mm - dddd, DD MMM 'YY ")
     return (

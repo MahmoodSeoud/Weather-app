@@ -4,18 +4,16 @@ import CityCard from './WeatherApp/CityCard';
 import CityDetails from './WeatherApp/CityDetails';
 import Search from './WeatherApp/Search';
 import { APITemp, APILocation } from './API_Key';
-import { debug } from 'console';
 
-let nextId: number = 0;
 const defaultCities: City[] = [{
-  temperature: 0,
-  name: 'Birmingham',
-  key: 0
+  temperature: null,
+  name: '',
+  key: null
 }];
 
 export interface City {
-  key: number;
-  temperature: number;
+  key: number | null;
+  temperature: number | null;
   name: string;
 }
 
@@ -24,24 +22,51 @@ let lat: number = 0;
 let lon: number = 0;
 
 function App() {
+
   const [name, setName] = useState('');
   const [cities, setCities] = useState<City[]>(defaultCities);
   const [selectedCity, setSelectedCity] = useState<City | null>(null)
 
+  // Component did mount
   useEffect(() => {
-    /*     console.log(name);
-        console.log(cities) */
-  }, [name]);
+    const fetchData = async () => {
+      const cityName = 'Copenhagen';
+      setName(cityName);
+      await getData(cityName);
+    };
 
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
+    fetchData();
+    if (cities && cities.length > 0) {
+      setSelectedCity(cities[cities.length - 1])
+    }
+  }, []);
 
-    let API: string = APILocation(name);
+  // COmponent did update (cities)
+  useEffect(() => {
+    if (cities && cities.length > 0) {
+      setSelectedCity(cities[cities.length - 1])
+    }
+  }, [cities]);
+
+
+
+  const getData = async (locationName: string) => {
+    let API: string = APILocation(locationName);
     [lat, lon] = await getLocation(API);
 
     API = APITemp([lat, lon])
-    getTemp(API)
+    await getTemp(API)
+    debugger;
+    // Resetting the input
+    resetInput();
+  }
 
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    await getData(name);
+  }
+
+  const resetInput = () => {
     setName("");
   }
 
@@ -53,16 +78,12 @@ function App() {
           lat = data[0].lat;
           lon = data[0].lon;
           resolve([lat, lon]);
-        }).catch(e =>
-          reject(e)
-        );
+        }).catch(e => reject(e));
     })
   }
 
-  const getTemp = (API: any) => {
-
-    let tempName: string = name
-    try {
+  const getTemp = (API: any): Promise<void> => {
+    return new Promise((resolve, reject) => {
       // Get data
       fetch(API)
         .then(response => response.json())
@@ -71,12 +92,11 @@ function App() {
             key: data.id,
             temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
             // and set the temperature to the api call
-            name: tempName,
+            name: name,
           }]);
-        })
-    } catch (error) {
-      console.log(error);
-    }
+          resolve()
+        }).catch(error => reject(error));
+    })
   }
 
   const handleKeyDown = (event: any) => {
