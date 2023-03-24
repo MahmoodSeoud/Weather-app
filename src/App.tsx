@@ -5,15 +5,9 @@ import CityDetails from './WeatherApp/CityDetails';
 import Search from './WeatherApp/Search';
 import { APITemp, APILocation } from './API_Key';
 
-const defaultCities: City[] = [{
-  temperature: null,
-  name: '',
-  key: null
-}];
-
 export interface City {
-  key: number | null;
-  temperature: number | null;
+  key: number;
+  temperature: number;
   name: string;
 }
 
@@ -24,39 +18,36 @@ let lon: number = 0;
 function App() {
 
   const [name, setName] = useState('');
-  const [cities, setCities] = useState<City[]>(defaultCities);
-  const [selectedCity, setSelectedCity] = useState<City | null>(null)
+  const [cities, setCities] = useState<City[]>([]);
+  const [selectedCity, setSelectedCity] = useState<City>()
 
   // Component did mount
   useEffect(() => {
     const fetchData = async () => {
-      const cityName = 'Copenhagen';
-      setName(cityName);
-      await getData(cityName);
+      await getData('Copenhagen');
     };
 
     fetchData();
-    if (cities && cities.length > 0) {
-      setSelectedCity(cities[cities.length - 1])
-    }
   }, []);
 
-  // COmponent did update (cities)
+  // Component did update (cities)
   useEffect(() => {
     if (cities && cities.length > 0) {
       setSelectedCity(cities[cities.length - 1])
     }
   }, [cities]);
 
-
-
+  //  Fetch data from API call and set to that city.
   const getData = async (locationName: string) => {
-    let API: string = APILocation(locationName);
+    let tempLocationName = (locationName[0].toUpperCase() + locationName.slice(1).toLowerCase()).trim();
+    let API: string = APILocation(tempLocationName);
     [lat, lon] = await getLocation(API);
 
-    API = APITemp([lat, lon])
-    await getTemp(API)
-    debugger;
+    // Make sure that the lat and lot calls are valid
+    if (lat != 0 && lon != 0) {
+      API = APITemp([lat, lon])
+      await getTemp(API, tempLocationName)
+    }
     // Resetting the input
     resetInput();
   }
@@ -66,10 +57,12 @@ function App() {
     await getData(name);
   }
 
+  // Resest the input after user is done typing
   const resetInput = () => {
     setName("");
   }
 
+  // API call to get the latitude and longitude of the inputtet location
   const getLocation = (API: any): Promise<number[]> => {
     return new Promise((resolve, reject) => {
       fetch(API)
@@ -78,11 +71,15 @@ function App() {
           lat = data[0].lat;
           lon = data[0].lon;
           resolve([lat, lon]);
-        }).catch(e => reject(e));
+        }).catch(e => {
+          alert('Please enter a valid city')
+          reject(e)
+        });
     })
   }
 
-  const getTemp = (API: any): Promise<void> => {
+  // API call to get the temperature of the given latitude and longitude 
+  const getTemp = (API: any, name: string): Promise<void> => {
     return new Promise((resolve, reject) => {
       // Get data
       fetch(API)
@@ -99,12 +96,13 @@ function App() {
     })
   }
 
+  // Handle the event that user press enter
   const handleKeyDown = (event: any) => {
     if (event.keyCode === 13) {
       handleSubmit(event);
     }
   }
-
+  // Handle the event the user clicks a city to view their temperature
   const handleOnCityClick = (city: City) => {
     setSelectedCity(city)
   }
