@@ -5,7 +5,7 @@ function CityDetails({ temperature, cityName}: { temperature: number | null, cit
     today = moment(new Date()).format("HH:mm - dddd, DD MMM 'YY ")
     return (
         <div className="city-details-container">
-            <p className="city-temp">{temperature} <sup className="temp-sup">&deg;</sup></p>
+            <p className="city-temp">{temperature}<sup className="temp-sup">&deg;</sup></p>
             <div className="city-more-info">
                 <p className="city-location">{cityName}</p>
                 <p className="date">{today}</p>

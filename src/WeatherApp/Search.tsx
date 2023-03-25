@@ -16,6 +16,8 @@ function Search(props: SearchProps) {
                     value={props.name}
                     onChange={(e) => props.setName(e.target.value)}
                     onKeyDown={props.handleKeyDown}
+                    autoFocus
+                    type="text"
                     placeholder={'Another location'}
                 />
                 <hr className="search-underscore"></hr>

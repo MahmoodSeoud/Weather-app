@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'SF-Pro';
+  src: url('../fonts/SF-Pro.ttf');
+  font-style: normal;
+  font-weight: 400;
+}
+
 .web-cover {
   display: flex;
   color: white;
@@ -19,8 +26,9 @@
 .city-details-container {
   display: flex;
   align-items: flex-end;
-  font-family: 'Jost' sans-serif;
+  font-family: 'SF-Pro' sans-serif;
   margin-bottom: 10vh;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .temp-sup {
@@ -66,7 +74,7 @@
   backdrop-filter: blur(2vh) brightness(70%);
   height: 100vh;
   padding: 5rem;
-  font-size: 26px;
+  font-size: 32px;
   box-sizing: border-box;
   margin-bottom: 0;
 }
@@ -75,10 +83,12 @@
   margin-top: 2vh;
   color: white;
   border: none;
+  outline: none;
   background-color: transparent;
   width: 20vh;
   height: 2vh;
   margin-bottom: 0;
+  padding: o.5rem;
 }
 
 .search-underscore {
@@ -87,6 +97,7 @@
 
 .CityCard-card-container {
   margin-top: 10vh;
+  gap: 2rem;
 }
 
 .CityCard-card {
@@ -95,6 +106,40 @@
 
 .CityCard-card:active {
   color: white;
+}
+
+
+
+.weather-details-list {
+  list-style-type: none;
+  /* remove circle from list elements */
+  display: flex;
+  /* set the list items to display inline */
+  justify-content: space-between;
+  /* add space between the divs */
+  padding: 0;
+  /* remove the default padding from the list */
+  margin: 0;
+  /* remove the default margin from the list */
+}
+
+.weather-details-list-element {
+  display: flex;
+  /* set the list items to display inline */
+  flex-direction: column;
+  /* stack the divs vertically */
+  align-items: center;
+  /* center the divs horizontally */
+  justify-content: center;
+  /* center the divs vertically */
+  margin: 0 0.5rem;
+  /* add spacing between the list items */
+}
+
+.weater-details-list-element-text {
+  margin: 0.5rem 0;
+  /* add spacing between the divs */
+
 }
 
 @media only screen and (max-width: 1300px) {

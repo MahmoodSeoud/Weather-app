@@ -4,11 +4,15 @@ import CityCard from './WeatherApp/CityCard';
 import CityDetails from './WeatherApp/CityDetails';
 import Search from './WeatherApp/Search';
 import { APITemp, APILocation } from './API_Key';
+import WeatherDetails from './WeatherApp/WeatherDetails';
 
 export interface City {
   key: number;
-  temperature: number;
   name: string;
+  temperature: number;
+  cloudPercentage: number;
+  humidityPercentage: number;
+  windSpeed: number;
 }
 
 // Global lattiude and longitude for the web API
@@ -86,10 +90,13 @@ function App() {
         .then(response => response.json())
         .then(data => {
           setCities([...cities, {
+            name: name,
             key: data.id,
             temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
             // and set the temperature to the api call
-            name: name,
+            cloudPercentage: data.clouds.all,
+            humidityPercentage: data.main.humidity,
+            windSpeed: data.wind.speed
           }]);
           resolve()
         }).catch(error => reject(error));
@@ -120,7 +127,6 @@ function App() {
         </div>
       </div>
       <div className='input'>
-
         <div className='search-input'>
           <Search
             handleKeyDown={handleKeyDown}
@@ -133,6 +139,9 @@ function App() {
             cities={cities}
             handleOnCityClick={(city) => handleOnCityClick(city)}
           />
+        </div>
+        <div className='weather-details'>
+          <WeatherDetails />
         </div>
       </div>
     </div>
