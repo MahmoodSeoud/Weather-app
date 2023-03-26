@@ -20,7 +20,7 @@ function Search(props: SearchProps) {
                     type="text"
                     placeholder={'Another location'}
                 />
-                <hr className="search-underscore"></hr>
+                <hr className="underscore"></hr>
             </div>
         </>
 

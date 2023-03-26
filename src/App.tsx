@@ -141,7 +141,11 @@ function App() {
           />
         </div>
         <div className='weather-details'>
-          <WeatherDetails />
+          <WeatherDetails 
+            humidityPercentage={selectedCity?.humidityPercentage}
+            cloudPercentage={selectedCity?.cloudPercentage}
+            windSpeed={selectedCity?.windSpeed}
+          />
         </div>
       </div>
     </div>
