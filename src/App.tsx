@@ -13,6 +13,7 @@ export interface City {
   cloudPercentage: number;
   humidityPercentage: number;
   windSpeed: number;
+  weatherIcon: any;
 }
 
 // Global lattiude and longitude for the web API
@@ -96,7 +97,9 @@ function App() {
             // and set the temperature to the api call
             cloudPercentage: data.clouds.all,
             humidityPercentage: data.main.humidity,
-            windSpeed: data.wind.speed
+            windSpeed: data.wind.speed,
+            weatherIcon: data.weather[0].icon
+      
           }]);
           resolve()
         }).catch(error => reject(error));
@@ -122,6 +125,7 @@ function App() {
             <CityDetails
               temperature={selectedCity.temperature}
               cityName={selectedCity.name}
+              weatherIcon={selectedCity?.weatherIcon}
             />
           )}
         </div>
