@@ -9,11 +9,14 @@ import WeatherDetails from './WeatherApp/WeatherDetails';
 export interface City {
   key: number;
   name: string;
-  temperature: number;
-  cloudPercentage: number;
-  humidityPercentage: number;
-  windSpeed: number;
-  weatherIcon: any;
+  weather: {
+    temperature: number;
+    cloudPercentage: number;
+    humidityPercentage: number;
+    windSpeed: number;
+    icon: string;
+    description: string;
+  };
 }
 
 // Global lattiude and longitude for the web API
@@ -93,13 +96,16 @@ function App() {
           setCities([...cities, {
             name: name,
             key: data.id,
-            temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
-            // and set the temperature to the api call
-            cloudPercentage: data.clouds.all,
-            humidityPercentage: data.main.humidity,
-            windSpeed: data.wind.speed,
-            weatherIcon: data.weather[0].icon
-      
+            weather: {
+              temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
+              // and set the temperature to the api call
+              cloudPercentage: data.clouds.all,
+              humidityPercentage: data.main.humidity,
+              windSpeed: data.wind.speed,
+              icon: data.weather[0].icon,
+              description: data.weather[0].description
+            },
+
           }]);
           resolve()
         }).catch(error => reject(error));
@@ -123,9 +129,10 @@ function App() {
         <div className='city-details'>
           {selectedCity && (
             <CityDetails
-              temperature={selectedCity.temperature}
+              temperature={selectedCity.weather.temperature}
               cityName={selectedCity.name}
-              weatherIcon={selectedCity?.weatherIcon}
+              weatherIcon={selectedCity?.weather.icon}
+              weatherDescription={selectedCity?.weather.description}
             />
           )}
         </div>
@@ -145,10 +152,10 @@ function App() {
           />
         </div>
         <div className='weather-details'>
-          <WeatherDetails 
-            humidityPercentage={selectedCity?.humidityPercentage}
-            cloudPercentage={selectedCity?.cloudPercentage}
-            windSpeed={selectedCity?.windSpeed}
+          <WeatherDetails
+            humidityPercentage={selectedCity?.weather.humidityPercentage}
+            cloudPercentage={selectedCity?.weather.cloudPercentage}
+            windSpeed={selectedCity?.weather.windSpeed}
           />
         </div>
       </div>
