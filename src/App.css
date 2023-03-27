@@ -61,8 +61,6 @@
   color: rgb(220, 220, 220);
 }
 
-
-
 .city-location {
   font-size: 100px;
   margin-bottom: 0;
@@ -164,8 +162,9 @@
   .input {
     height: auto;
     min-height: 100vh;
+    width: auto;
     padding: 3rem;
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .temp-sup {
@@ -183,12 +182,13 @@
   }
 
   .date {
-    font-size: 10px;
+    width: auto;
+    font-size: 20px;
     margin-bottom: 2vh;
   }
 
   .city-location {
-    font-size: 30px;
+    font-size: 32px;
   }
 
   .CityCard-card-container {
@@ -199,7 +199,7 @@
   }
 
   .CityCard-card {
-    margin-bottom: 2vh;
+    margin-top: 2vh;
   }
 
   .weather-details-title {
@@ -216,7 +216,7 @@
   }
 
   .weather-description {
-    font-size: 12px;
+    font-size: 22px;
   }
 }
 
