@@ -52,7 +52,7 @@ function App() {
     [lat, lon] = await getLocation(API);
 
     // Make sure that the lat and lot calls are valid
-    if (lat != 0 && lon != 0) {
+    if (lat !== 0 && lon !== 0) {
       API = APITemp([lat, lon])
       await getTemp(API, tempLocationName)
     }

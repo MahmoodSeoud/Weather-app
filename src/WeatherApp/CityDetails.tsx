@@ -23,6 +23,7 @@ function CityDetails(props: cityDetailsProps) {
                 </div>
                 <div className="weather-icon-container">
                     <img
+                        alt="Weather icon"
                         src={`https://openweathermap.org/img/wn/${props.weatherIcon}@2x.png`}
                         className="weather-icon"
                     />
