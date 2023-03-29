@@ -12,6 +12,7 @@ export const APILocation = (location: string): string => {
 }
 
 export const APITemp = (locationArr: number[]): string => {
+
     return `${API_BASE_URL_WEATHER}?lat=${locationArr[0]}&lon=${locationArr[1]}&${API_KEY_NAME}=${API_KEY_VALUE}`;
 }
 
