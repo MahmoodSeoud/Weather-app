@@ -148,79 +148,7 @@
   color: rgb(220, 220, 220);
 }
 
-
 @media only screen and (max-width: 1200px) {
-  .web-cover {
-    height: auto;
-    min-height: 100vh;
-  }
-
-  .image {
-  flex-direction: column;
-  }
-
-  .input {
-    height: auto;
-    min-height: 100vh;
-    width: auto;
-    padding: 3rem;
-    font-size: 22px;
-  }
-
-  .temp-sup {
-    font-size: 50px;
-  }
-
-  .city-temp {
-    font-size: 75px;
-  }
-
-  .city-more-info {
-    align-items: center;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-  }
-
-  .date {
-    width: auto;
-    font-size: 20px;
-    margin-bottom: 2vh;
-  }
-
-  .city-location {
-    font-size: 32px;
-  }
-
-  .CityCard-card-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 5vh;
-  }
-
-  .CityCard-card {
-    margin-top: 2vh;
-  }
-
-  .weather-details-title {
-    font-size: 20px;
-  }
-
-  .weather-details-list-element {
-    margin-bottom: 1vh;
-  }
-
-  .weather-icon-container {
-    margin-left: 1vh;
-    margin-bottom: 1vh;
-  }
-
-  .weather-description {
-    font-size: 22px;
-  }
-}
-
-@media only screen and (max-width: 820px) {
   .web-cover {
     height: auto;
     min-height: 100vh;
