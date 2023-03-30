@@ -141,18 +141,6 @@ function App() {
 
   return (
     <div className='web-cover'>
-      <div className='image'>
-        <div className='city-details'>
-          {selectedCity && (
-            <CityDetails
-              temperature={selectedCity.weather.temperature}
-              cityName={selectedCity.name}
-              weatherIcon={selectedCity?.weather.icon}
-              weatherDescription={selectedCity?.weather.description}
-            />
-          )}
-        </div>
-      </div>
       <div className='input'>
         <div className='search-input'>
           <Search
@@ -161,7 +149,7 @@ function App() {
             name={name}
           />
         </div>
-        <div className='CityCard-card-container'>
+        <div className='citycard-card-container'>
           <CityCard
             cities={cities}
             handleOnCityClick={(city) => handleOnCityClick(city)}
@@ -174,6 +162,16 @@ function App() {
             windSpeed={selectedCity?.weather.windSpeed}
           />
         </div>
+      </div>
+      <div className='image'>
+        {selectedCity && (
+          <CityDetails
+            temperature={selectedCity.weather.temperature}
+            cityName={selectedCity.name}
+            weatherIcon={selectedCity?.weather.icon}
+            weatherDescription={selectedCity?.weather.description}
+          />
+        )}
       </div>
     </div>
   );

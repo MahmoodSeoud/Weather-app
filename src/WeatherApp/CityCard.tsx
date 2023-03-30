@@ -16,7 +16,7 @@ function CityCard(props: CityCardProps) {
                         <div
                         key={city.key}
                         onClick={() => props.handleOnCityClick(city)}
-                        className='CityCard-card'
+                        className='citycard-card'
                         >
                             {city.name}
                         </div>

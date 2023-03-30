@@ -6,8 +6,6 @@
 }
 
 .web-cover {
-  display: flex;
-  color: white;
   min-height: 100vh;
   background-image: url('../images/mix.jpg');
   background-size: cover;
@@ -15,126 +13,64 @@
   background-repeat: no-repeat;
 }
 
-.image {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.city-details-container {
-  display: flex;
-  align-items: flex-end;
-  font-family: 'SF-Pro' sans-serif;
-  margin-bottom: 10vh;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, );
-  text-align: center;
-}
-
-.temp-sup {
-  font-size: 150px;
-}
-
-.city-temp {
-  font-size: 200px;
-  margin-bottom: 0;
-}
-
-.city-more-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  margin-top: 0;
-  margin-bottom: 3vh;
-}
-
-.date {
-  font-size: 25px;
-  margin-top: 0;
-  margin-bottom: 5px;
-  /* adjust margin to create spacing */
-  min-width: max-content;
-  text-align: center;
-  /* center the date text */
-  color: rgb(220, 220, 220);
-}
-
-.city-location {
-  font-size: 100px;
-  margin-bottom: 0;
-}
-
 .input {
-  flex: 0.5;
+  font-size: 1rem;
   backdrop-filter: blur(2vh) brightness(70%);
-  min-height: 100vh;
-  padding: 5rem;
-  font-size: 24px;
-  box-sizing: border-box;
-  margin-bottom: 0;
+  max-height: 2.5rem;
+  padding: 1rem;
 }
 
 .search-input {
-  margin-top: 2vh;
   color: white;
+  background-color: transparent;
+  font-size: 1rem;
   border: none;
   outline: none;
-  background-color: transparent;
-  font-size: 28px;
-  min-height: 7vh;
-  margin-bottom: 0;
+  text-align: center;
   padding: .5rem;
+  min-height: 2vh;
 }
 
 .underscore {
-  margin: 0;
   border-color: gray;
+  margin: 0;
 }
 
-.CityCard-card-container {
-  margin-top: 10vh;
-  gap: 2rem;
-}
-
-.CityCard-card {
-  color: gray;
-  margin-bottom: 2.5vh;
-}
-
-.CityCard-card:active {
-  color: white;
-}
-
-.weather-details-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.weather-details-list-element {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #d4d4d4;
-  margin-bottom: 2.5vh;
-}
-
-.weather-details-cover {
-  margin-top: 10vh;
-}
-
+.citycard-card-container,
+.citycard-card,
+.weather-details-list,
+.weather-details-list-element,
+.weather-details-cover,
 .weather-details-title {
-  margin: 5vh 0vh;
+  display: none;
 }
 
-
-.weather-icon-container {
+.image {
+  text-align: center;
   display: block;
-  margin-left: 2vh;
-  margin-bottom: 3vh;
+}
+
+.city-details-container {
+  font-family: 'SF-Pro', sans-serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0,.5 );
+  margin: 10vh 0 0;
+}
+
+.weather-description,
+.date,
+.city-location,
+.city-temp {
+  font-size: 2rem;
+  margin: 0;
+  color: rgb(220, 220, 220);
+}
+
+.city-temp {
+  font-size: 6rem;
+}
+
+.date {
+  font-size: 1rem;
 }
 
 .weather-description {
@@ -142,151 +78,122 @@
   margin-top: 0;
   margin-bottom: 5px;
   min-width: max-content;
-  text-align: center;
   color: rgb(220, 220, 220);
 }
 
-@media only screen and (max-width: 1200px) {
-  .web-cover {
-    min-height: auto;
-    min-height: 100vh;
-  }
-
-  .image {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+@media screen and (min-width: 40em) {
 
   .city-details-container {
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 5vh;
-  }
-
-  .temp-sup {
-    font-size: 75px;
+    grid-template-columns: .5fr 1fr 0.5fr;
+    position: fixed;
+    bottom: 10vh;
+    left: 20vh;
+    display: grid;
+    grid-template-areas:
+      "temp location icon"
+      ". date description";
   }
 
   .city-temp {
-    font-size: 100px;
-  }
-
-  .date {
-    font-size: 15px;
-    margin-bottom: 2vh;
-    min-width: auto;
+    grid-area: temp;
+    font-size: 10rem;
   }
 
   .city-location {
-    font-size: 50px;
-    margin-top: 2vh;
-    margin-bottom: 5vh;
+    align-self: last baseline;
+    grid-area: location;
+    font-size: 8em;
+    /* TODO Change this later */
+    margin-bottom: 0;
+  }
+
+  .weather-icon {
+    grid-area: icon;
+    align-self: last baseline;
+  }
+
+  .weather-description {
+    grid-area: description;
+    align-self: baseline;
+    text-align: left;
+  }
+
+  .date {
+    align-self: baseline;
+    grid-area: date;
+    margin-top: 0;
+    /* adjust margin to create spacing */
+    text-align: center;
+    /* center the date text */
+    font-size: 2em;
+  }
+
+
+  .web-cover {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "image input";
+  }
+
+  .image {
+    grid-area: image;
   }
 
   .input {
-    min-height: auto;
+    grid-area: input;
     min-height: 100vh;
-    max-width: 40%;
-    padding: 3rem;
-    font-size: 18px;
+    padding: 5rem;
+    font-size: 2rem;
+    color: #d4d4d4;
+    box-sizing: border-box;
   }
 
   .search-input {
-    font-size: 20px;
-    min-height: 5vh;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    text-align: left;
+    font-size: 2rem;
   }
 
-  .CityCard-card-container {
+  .citycard-card-container,
+  .citycard-card,
+  .weather-details-list,
+  .weather-details-list-element,
+  .weather-details-cover,
+  .weather-details-title {
+    display: block;
+  }
+
+  .citycard-card-container {
     margin-top: 5vh;
   }
 
-  .CityCard-card {
-    font-size: 18px;
-    margin-bottom: 1vh;
+  .citycard-card {
+    color: gray;
+    margin: 1.5vh 0 0;
+  }
+
+  .citycard-card:active {
+    color: white;
+  }
+
+  .weather-details-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .weather-details-list-element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #d4d4d4;
+    margin-bottom: 1.5vh;
+  }
+
+  .weather-details-cover {
+    margin: 10vh 0;
   }
 
   .weather-details-title {
-    margin: 3vh 0;
+    margin: 5vh 0vh;
   }
 
-  .weather-description {
-    font-size: 16px;
-    margin-bottom: 2vh;
-  }
-}
-
-
-@media only screen and (max-width: 480px) {
-  .web-cover {
-    min-height: auto;
-    min-width: 50vh;
-  }
-
-  .image {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .city-details-container {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1vh;
-  }
-
-  .temp-sup {
-    font-size: 32px;
-  }
-
-  .city-temp {
-    font-size: 50px;
-  }
-
-  .date {
-    font-size: 12px;
-    margin-bottom: 1vh;
-    min-width: auto;
-  }
-
-  .city-location {
-    font-size: 25px;
-    margin-top: 2vh;
-    margin-bottom: 1vh;
-  }
-
-  .input {
-    min-width: 00%;
-    min-height: 100vh;
-    padding: 0.5rem;
-    font-size: 12px;
-  }
-
-  .search-input {
-    font-size: 12px;
-    min-height: 2vh;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-  }
-
-  .CityCard-card-container {
-    margin-top: 2vh;
-  }
-
-  .CityCard-card {
-    font-size: 12px;
-    margin-bottom: 1vh;
-  }
-
-  .weather-details-title {
-    margin: 2vh 0;
-  }
-
-  .weather-description {
-    font-size: 12px;
-    margin-bottom: 2vh;
-  }
 }
