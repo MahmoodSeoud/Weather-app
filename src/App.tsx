@@ -60,6 +60,7 @@ function App() {
     resetInput();
   }
 
+  // When submiting -> getData
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     await getData(name);

@@ -8,7 +8,7 @@
 .web-cover {
   display: flex;
   color: white;
-  height: 100vh;
+  min-height: 100vh;
   background-image: url('../images/mix.jpg');
   background-size: cover;
   background-position: center;
@@ -55,7 +55,7 @@
   margin-top: 0;
   margin-bottom: 5px;
   /* adjust margin to create spacing */
-  width: max-content;
+  min-width: max-content;
   text-align: center;
   /* center the date text */
   color: rgb(220, 220, 220);
@@ -68,9 +68,8 @@
 
 .input {
   flex: 0.5;
-  /* background-color: rgba(9, 9, 9, 0.5); */
   backdrop-filter: blur(2vh) brightness(70%);
-  height: 100vh;
+  min-height: 100vh;
   padding: 5rem;
   font-size: 24px;
   box-sizing: border-box;
@@ -84,8 +83,7 @@
   outline: none;
   background-color: transparent;
   font-size: 28px;
-  width: 100%;
-  height: 7vh;
+  min-height: 7vh;
   margin-bottom: 0;
   padding: .5rem;
 }
@@ -143,14 +141,14 @@
   font-size: 25px;
   margin-top: 0;
   margin-bottom: 5px;
-  width: max-content;
+  min-width: max-content;
   text-align: center;
   color: rgb(220, 220, 220);
 }
 
 @media only screen and (max-width: 1200px) {
   .web-cover {
-    height: auto;
+    min-height: auto;
     min-height: 100vh;
   }
 
@@ -177,7 +175,7 @@
   .date {
     font-size: 15px;
     margin-bottom: 2vh;
-    width: auto;
+    min-width: auto;
   }
 
   .city-location {
@@ -187,15 +185,16 @@
   }
 
   .input {
-    height: auto;
+    min-height: auto;
     min-height: 100vh;
+    max-width: 40%;
     padding: 3rem;
     font-size: 18px;
   }
 
   .search-input {
     font-size: 20px;
-    height: 5vh;
+    min-height: 5vh;
     margin-top: 2vh;
     margin-bottom: 2vh;
   }
@@ -222,8 +221,8 @@
 
 @media only screen and (max-width: 480px) {
   .web-cover {
-    height: auto;
-    min-height: 50vh;
+    min-height: auto;
+    min-width: 50vh;
   }
 
   .image {
@@ -250,7 +249,7 @@
   .date {
     font-size: 12px;
     margin-bottom: 1vh;
-    width: auto;
+    min-width: auto;
   }
 
   .city-location {
@@ -260,8 +259,7 @@
   }
 
   .input {
-    width: 00%;
-    height: auto;
+    min-width: 00%;
     min-height: 100vh;
     padding: 0.5rem;
     font-size: 12px;
@@ -269,7 +267,7 @@
 
   .search-input {
     font-size: 12px;
-    height: 2vh;
+    min-height: 2vh;
     margin-top: 1vh;
     margin-bottom: 1vh;
   }
