@@ -90,10 +90,10 @@ function App() {
   const checkIfExists = (data: any): boolean => {
     const foundCity = cities.find(city => city.key === data.id);
     if (!foundCity) {
-      return false
+      return false;
     }
-    setSelectedCity(foundCity)
-    return true
+    setSelectedCity(foundCity);
+    return true;
   }
 
   // API call to get the temperature of the given latitude and longitude 
@@ -106,8 +106,7 @@ function App() {
 
           const alreadyInArr = checkIfExists(data);
 
-          if (alreadyInArr) {
-          } else {
+          if (!alreadyInArr) {
             setCities([...cities, {
               name: name,
               key: data.id,
