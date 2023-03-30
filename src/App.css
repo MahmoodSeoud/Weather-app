@@ -85,9 +85,6 @@
 
   .city-details-container {
     grid-template-columns: .5fr 1fr 0.5fr;
-    position: fixed;
-    bottom: 10vh;
-    left: 20vh;
     display: grid;
     grid-template-areas:
       "temp location icon"
