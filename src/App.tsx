@@ -27,9 +27,9 @@ function App() {
 
   const [name, setName] = useState('');
   const [cities, setCities] = useState<City[]>([]);
-  const [selectedCity, setSelectedCity] = useState<City>()
+  const [selectedCity, setSelectedCity] = useState<City>();
 
-  // Component did mount
+  // Component didmount
   useEffect(() => {
     const fetchData = async () => {
       await getData('Copenhagen');
@@ -86,6 +86,16 @@ function App() {
     })
   }
 
+  // Check if data is already in the array.
+  const checkIfExists = (data: any): boolean => {
+    const foundCity = cities.find(city => city.key === data.id);
+    if (!foundCity) {
+      return false
+    }
+    setSelectedCity(foundCity)
+    return true
+  }
+
   // API call to get the temperature of the given latitude and longitude 
   const getTemp = (API: any, name: string): Promise<void> => {
     return new Promise((resolve, reject) => {
@@ -93,20 +103,26 @@ function App() {
       fetch(API)
         .then(response => response.json())
         .then(data => {
-          setCities([...cities, {
-            name: name,
-            key: data.id,
-            weather: {
-              temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
-              // and set the temperature to the api call
-              cloudPercentage: data.clouds.all,
-              humidityPercentage: data.main.humidity,
-              windSpeed: data.wind.speed,
-              icon: data.weather[0].icon,
-              description: data.weather[0].description
-            },
 
-          }]);
+          const alreadyInArr = checkIfExists(data);
+
+          if (alreadyInArr) {
+          } else {
+            setCities([...cities, {
+              name: name,
+              key: data.id,
+              weather: {
+                temperature: Math.floor(data.main.temp - 273.15), // Convert from Kelvin to Celcius 
+                // and set the temperature to the api call
+                cloudPercentage: data.clouds.all,
+                humidityPercentage: data.main.humidity,
+                windSpeed: data.wind.speed,
+                icon: data.weather[0].icon,
+                description: data.weather[0].description
+              },
+            }]);
+          }
+
           resolve()
         }).catch(error => reject(error));
     })
