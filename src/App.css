@@ -31,6 +31,16 @@
   min-height: 2vh;
 }
 
+.input-btn {
+  color: white;
+  height: 2em;
+  min-width: 25em;
+  margin: 2em 0 0;
+  border: none;
+  border-radius: 10em;
+  background-color: coral;
+}
+
 .underscore {
   border-color: gray;
   margin: 0;
@@ -52,7 +62,7 @@
 
 .city-details-container {
   font-family: 'SF-Pro', sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0,.5 );
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
   margin: 10vh 0 0;
 }
 
@@ -150,6 +160,10 @@
     font-size: 2rem;
   }
 
+.input-btn {
+  height: 3em;
+  min-width: 59em;
+}
   .citycard-card-container,
   .citycard-card,
   .weather-details-list,

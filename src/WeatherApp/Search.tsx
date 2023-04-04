@@ -3,11 +3,12 @@ import '../App.css';
 
 interface SearchProps {
     handleKeyDown: (event: any) => void;
+    handleSubmit: (event: any) => void
     setName: (event: any) => void;
     name: string;
 }
 function Search(props: SearchProps) {
-    
+
     return (
         <>
             <div>
@@ -20,8 +21,14 @@ function Search(props: SearchProps) {
                     type="text"
                     placeholder={'Another location'}
                 />
-                <hr className="underscore"></hr>
             </div>
+            <hr className="underscore"></hr>
+            <button
+                className="input-btn"
+                onClick={props.handleSubmit}
+            >
+                Submit location
+            </button>
         </>
 
     );

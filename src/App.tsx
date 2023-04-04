@@ -144,6 +144,7 @@ function App() {
       <div className='input'>
         <div className='search-input'>
           <Search
+            handleSubmit={handleSubmit}
             handleKeyDown={handleKeyDown}
             setName={setName}
             name={name}
