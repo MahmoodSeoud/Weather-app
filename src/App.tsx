@@ -5,6 +5,7 @@ import CityDetails from './WeatherApp/CityDetails';
 import Search from './WeatherApp/Search';
 import { APITemp, APILocation } from './API_Key';
 import WeatherDetails from './WeatherApp/WeatherDetails';
+import { constants } from 'buffer';
 
 export interface City {
   key: number;
@@ -23,27 +24,51 @@ export interface City {
 let lat: number = 0;
 let lon: number = 0;
 
+// Initial value of the cities array
+const initialCities = () => {
+  const storedCities = localStorage.getItem('cities');
+  return storedCities ? JSON.parse(storedCities) : [];
+}
+
+// Initial value of the selectedCity
+const initialSelectedCity = () => {
+  const storedSelectedCity = localStorage.getItem('selectedCity');
+  return storedSelectedCity ? JSON.parse(storedSelectedCity) : null;
+}
+
+
 function App() {
 
+  // UseState Hook
   const [name, setName] = useState('');
-  const [cities, setCities] = useState<City[]>([]);
-  const [selectedCity, setSelectedCity] = useState<City>();
+  const [cities, setCities] = useState<City[]>(initialCities);
+  const [selectedCity, setSelectedCity] = useState<City | null>(initialSelectedCity);
 
-  // Component didmount
+
+  // Componenet did mount
   useEffect(() => {
     const fetchData = async () => {
-      await getData('Copenhagen');
-    };
-
+      // If there was no cities to get from local storage, then get "Copenhagen"
+      // This is because of my location
+      if (!cities || cities.length === 0) {
+        await getData('Copenhagen');
+      }
+    }
     fetchData();
   }, []);
 
-  // Component did update (cities)
+  // Componenet did update for the cities
   useEffect(() => {
-    if (cities && cities.length > 0) {
-      setSelectedCity(cities[cities.length - 1])
-    }
+    // Update the local storage
+    localStorage.setItem('cities', JSON.stringify(cities));
+    setSelectedCity(cities[cities.length - 1]);
   }, [cities]);
+
+  // Componenet did update for selectedCity
+  useEffect(() => {
+    // Update the local storage
+    localStorage.setItem('selectedCity', JSON.stringify(selectedCity));
+  }, [selectedCity])
 
   //  Fetch data from API call and set to that city.
   const getData = async (locationName: string) => {
@@ -64,6 +89,7 @@ function App() {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     await getData(name);
+    setSelectedCity(cities[cities.length - 1]);
   }
 
   // Resest the input after user is done typing
@@ -81,6 +107,7 @@ function App() {
           lon = data[0].lon;
           resolve([lat, lon]);
         }).catch(e => {
+          console.error("API error", e)
           alert('Please enter a valid city')
           reject(e)
         });
@@ -89,7 +116,7 @@ function App() {
 
   // Check if data is already in the array.
   const checkIfExists = (data: any): boolean => {
-    const foundCity = cities.find(city => city.key === data.id);
+    const foundCity = cities.find((city: City) => city.key === data.id);
     if (!foundCity) {
       return false;
     }
